@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+      <UserSecretsId>26aee212-9036-43d9-9872-b3094e3b23ed</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.10" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.0" />
+      <PackageReference Include="Scalar.AspNetCore" Version="2.10.1" />
+      <PackageReference Include="StackExchange.Redis" Version="2.9.32" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\UrlShortener.Application\UrlShortener.Application.csproj" />
+      <ProjectReference Include="..\UrlShortener.Contracts\UrlShortener.Contracts.csproj" />
+      <ProjectReference Include="..\UrlShortener.Infrastructure\UrlShortener.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
