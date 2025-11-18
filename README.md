@@ -17,7 +17,7 @@ This project is a high-performance, multi-tenant URL shortener API built with AS
   - [2. Creating a Short URL](#2-creating-a-short-url)
   - [3. Rate Limiting](#3-rate-limiting)
   - [4. Database Storage & Analytics](#4-database-storage--analytics)
-- [Future Enhancements](#future-enhancements)
+- [Project Roadmap](#project-roadmap)
 - [Architectural Decisions and Reflections](#architectural-decisions-and-reflections)
   - [The Dependency Rule (Clean Architecture)](#the-dependency-rule-clean-architecture)
   - [Separating Commands and Queries (CQRS)](#separating-commands-and-queries-cqrs)
@@ -39,15 +39,26 @@ The solution is structured using Clean Architecture principles, physically separ
 *   **Cache (Redis):** Provides a lightning-fast, in-memory lookup for short URLs to avoid hitting the database on reads.
 *   **Database (PostgreSQL):** The persistent source of truth for URL mappings and analytics data.
 
-## Key Features
+## Project Roadmap
 
-*   **CQRS (Command Query Responsibility Segregation):** Physically separated into two microservices for independent scaling.
-*   **Clean Architecture:** Solution is layered into Domain, Application, Infrastructure, and API projects.
-*   **High-Performance Caching:** Utilizes a Redis cache-aside pattern for sub-10ms response times.
-*   **Asynchronous Analytics:** Publishes events to RabbitMQ, which are consumed by a background service to update a click counter in PostgreSQL.
-*   **Non-Predictable Short URLs:** A bijective function shuffles sequential database IDs into unique, non-predictable, fixed-length (7-character) short codes.
-*   **API Key Authentication:** Secures the write endpoint using custom ASP.NET Core middleware.
-*   **Dynamic Rate Limiting:** Implements tier-based rate limiting ("free-tier", "pro-tier") based on the provided API key.
+This project provides a solid architectural foundation. The following checklist outlines the features that have been implemented and the future enhancements planned to elevate it to a production-ready application.
+
+### Completed Features
+
+- [x] **CQRS (Command Query Responsibility Segregation):** Physically separated into two microservices for independent scaling.
+- [x] **Clean Architecture:** Solution is layered into Domain, Application, Infrastructure, and API projects.
+- [x] **High-Performance Caching:** Utilizes a Redis cache-aside pattern for sub-10ms response times.
+- [x] **Asynchronous Analytics:** Publishes events to RabbitMQ, which are consumed by a background service to update a click counter in PostgreSQL.
+- [x] **Non-Predictable Short URLs:** A bijective function shuffles sequential database IDs into unique, non-predictable, fixed-length (7-character) short codes.
+- [x] **API Key Authentication:** Secures the write endpoint using custom ASP.NET Core middleware.
+- [x] **Dynamic Rate Limiting:** Implements tier-based rate limiting ("free-tier", "pro-tier") based on the provided API key.
+
+### Future Enhancements
+
+- [ ] **Automated Testing:** Create dedicated test projects for Unit and Integration tests using frameworks like xUnit and Moq to ensure code quality and reliability.
+- [ ] **Containerize the Entire Application:** Create a `docker-compose.yml` file to define and run the entire application stack (both APIs, PostgreSQL, Redis, RabbitMQ) with a single command.
+- [ ] **Structured Logging:** Implement a robust logging library like **Serilog** to write structured, queryable logs, and configure sinks for different environments (e.g., console, file, Seq).
+- [ ] **Full User Management:** Implement ASP.NET Core Identity for user registration, login, and the ability for users to generate and manage their own API keys.
 
 ## Getting Started
 
@@ -141,14 +152,6 @@ The created URL mapping is stored in PostgreSQL. The `ClickCount` is updated asy
 
 ![Database Storage](./screenshots/Process/db-storage.png)
 
-## Future Enhancements
-
-This project provides a solid architectural foundation. Future enhancements to elevate it to a production-ready application would include:
-
-*   **Automated Testing:** Create dedicated test projects for Unit and Integration tests using frameworks like xUnit and Moq to ensure code quality and reliability.
-*   **Containerize the Entire Application:** Create a `docker-compose.yml` file to define and run the entire application stack (both APIs, PostgreSQL, Redis, RabbitMQ) with a single command.
-*   **Structured Logging:** Implement a robust logging library like **Serilog** to write structured, queryable logs, and configure sinks for different environments (e.g., console, file, Seq).
-*   **Full User Management:** Implement ASP.NET Core Identity for user registration, login, and the ability for users to generate and manage their own API keys.
 
 ## Architectural Decisions and Reflections
 
