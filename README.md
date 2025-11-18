@@ -5,18 +5,7 @@ This project is a high-performance, multi-tenant URL shortener API built with AS
 ## Table of Contents
 - [High-Level Concept](#high-level-concept)
 - [Architecture Overview](#architecture-overview)
-- [Key Features](#key-features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [1. Start Infrastructure Services](#1-start-infrastructure-services)
-  - [2. Configure User Secrets](#2-configure-user-secrets)
-  - [3. Apply Database Migrations](#3-apply-database-migrations)
-  - [4. Run the APIs](#4-run-the-apis)
-- [Process Flow & Screenshots](#process-flow--screenshots)
-  - [1. Running the Services](#1-running-the-services)
-  - [2. Creating a Short URL](#2-creating-a-short-url)
-  - [3. Rate Limiting](#3-rate-limiting)
-  - [4. Database Storage & Analytics](#4-database-storage--analytics)
+- [Technologies and NuGet Packages](#technologies-and-nuget-packages)
 - [Project Roadmap](#project-roadmap)
 - [Architectural Decisions and Reflections](#architectural-decisions-and-reflections)
   - [The Dependency Rule (Clean Architecture)](#the-dependency-rule-clean-architecture)
@@ -38,6 +27,24 @@ The solution is structured using Clean Architecture principles, physically separ
 *   **Message Broker (RabbitMQ):** Decouples analytics processing from the user's redirect request.
 *   **Cache (Redis):** Provides a lightning-fast, in-memory lookup for short URLs to avoid hitting the database on reads.
 *   **Database (PostgreSQL):** The persistent source of truth for URL mappings and analytics data.
+
+## Technologies and NuGet Packages
+
+This project leverages the following key technologies and NuGet packages:
+
+*   **ASP.NET Core 9.0:** The web framework for building the APIs.
+*   **Entity Framework Core 9.0:** ORM for database interactions.
+    *   `Microsoft.EntityFrameworkCore`
+    *   `Microsoft.EntityFrameworkCore.Design`
+    *   `Npgsql.EntityFrameworkCore.PostgreSQL`
+*   **PostgreSQL:** The relational database.
+    *   `Npgsql`
+*   **Redis:** In-memory data store for caching.
+    *   `StackExchange.Redis`
+*   **RabbitMQ:** Message broker for asynchronous communication.
+    *   `RabbitMQ.Client`
+*   **Scalar.AspNetCore:** For API documentation and exploration.
+*   **Microsoft.Extensions.*:** Various libraries for dependency injection, configuration, and logging abstractions.
 
 ## Project Roadmap
 
